@@ -7,7 +7,7 @@
 **     Version     : Component 01.111, Driver 01.02, CPU db: 3.00.000
 **     Repository  : Kinetis
 **     Compiler    : GNU C Compiler
-**     Date/Time   : 2020-07-28, 20:58, # CodeGen: 32
+**     Date/Time   : 2020-07-28, 22:26, # CodeGen: 33
 **     Abstract    :
 **         This component "SPIMaster_LDD" implements MASTER part of synchronous
 **         serial master-slave communication.
@@ -65,10 +65,11 @@
 **            Clock configuration 6                        : This component disabled
 **            Clock configuration 7                        : This component disabled
 **     Contents    :
-**         Init               - LDD_TDeviceData* SM1_Init(LDD_TUserData *UserDataPtr);
-**         SendBlock          - LDD_TError SM1_SendBlock(LDD_TDeviceData *DeviceDataPtr, LDD_TData...
-**         ReceiveBlock       - LDD_TError SM1_ReceiveBlock(LDD_TDeviceData *DeviceDataPtr, LDD_TData...
-**         GetBlockSentStatus - bool SM1_GetBlockSentStatus(LDD_TDeviceData *DeviceDataPtr);
+**         Init                   - LDD_TDeviceData* SM1_Init(LDD_TUserData *UserDataPtr);
+**         SendBlock              - LDD_TError SM1_SendBlock(LDD_TDeviceData *DeviceDataPtr, LDD_TData...
+**         ReceiveBlock           - LDD_TError SM1_ReceiveBlock(LDD_TDeviceData *DeviceDataPtr, LDD_TData...
+**         GetBlockSentStatus     - bool SM1_GetBlockSentStatus(LDD_TDeviceData *DeviceDataPtr);
+**         GetBlockReceivedStatus - bool SM1_GetBlockReceivedStatus(LDD_TDeviceData *DeviceDataPtr);
 **
 **     Copyright : 1997 - 2015 Freescale Semiconductor, Inc. 
 **     All Rights Reserved.
@@ -386,6 +387,39 @@ bool SM1_GetBlockSentStatus(LDD_TDeviceData *DeviceDataPtr)
 
 /*
 ** ===================================================================
+**     Method      :  SM1_GetBlockReceivedStatus (component SPIMaster_LDD)
+*/
+/*!
+**     @brief
+**         This method returns whether the receiver is finished
+**         reception of all data block. The status flag is accumulated,
+**         after calling this method the status is returned and cleared
+**         (set to "false" state). This method is available only if
+**         method ReceiveBlock is enabled.
+**     @param
+**         DeviceDataPtr   - Device data structure
+**                           pointer returned by [Init] method.
+**     @return
+**                         - Return value:
+**                           true - Data block is completely received
+**                           false - Data block isn't completely received
+*/
+/* ===================================================================*/
+bool SM1_GetBlockReceivedStatus(LDD_TDeviceData *DeviceDataPtr)
+{
+  uint8_t Status;                      /* Temporary variable for flag saving */
+
+  /* {Default RTOS Adapter} Critical section begin, general PE function is used */
+  EnterCritical();
+  Status = ((SM1_TDeviceDataPtr)DeviceDataPtr)->SerFlag; /* Save flag for return */
+  ((SM1_TDeviceDataPtr)DeviceDataPtr)->SerFlag &= (uint8_t)(~(uint8_t)BLOCK_RECEIVED); /* Clear data block received flag */
+  /* {Default RTOS Adapter} Critical section end, general PE function is used */
+  ExitCritical();
+  return (bool)(((Status & BLOCK_RECEIVED) != 0U)? TRUE : FALSE); /* Return saved status */
+}
+
+/*
+** ===================================================================
 **     Method      :  SM1_Interrupt (component SPIMaster_LDD)
 **
 **     Description :
@@ -408,6 +442,7 @@ PE_ISR(SM1_Interrupt)
       if (DeviceDataPrv->InpRecvDataNum == DeviceDataPrv->InpDataNumReq) { /* Is the requested number of characters received? */
         SPI_PDD_DisableInterruptMask(SPI0_BASE_PTR, SPI_PDD_RX_BUFFER_FULL_OR_FAULT); /* Disable Rx buffer full interrupt */
         DeviceDataPrv->InpDataNumReq = 0x00U; /* If yes then clear number of requested characters to be received. */
+        DeviceDataPrv->SerFlag |= BLOCK_RECEIVED; /* Set data block received flag */
         SM1_OnBlockReceived(DeviceDataPrv->UserData);
       }
     }

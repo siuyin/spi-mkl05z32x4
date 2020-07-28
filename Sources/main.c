@@ -44,11 +44,11 @@ LDD_TDeviceData* ncs;
 LDD_TDeviceData* spi;
 
 void writeAndReadSPI(uint8_t* txBuf, uint8_t* rxBuf) {
-	Bit1_ClrVal(ncs);
+	Bit1_ClrVal(ncs);	// ncs: chip select, active low.
 	SM1_SendBlock(spi, txBuf, 2);
-	for (int i = 0; i < 500; i++) {
-	}
 	SM1_ReceiveBlock(spi, rxBuf, 2);
+	while (!SM1_GetBlockReceivedStatus(spi)) {	// wait for read to complete
+	}
 	Bit1_SetVal(ncs);
 }
 /*lint -save  -e970 Disable MISRA rule (6.3) checking. */
@@ -67,19 +67,14 @@ int main(void)
 	uint8_t txBuf[2];
 	uint8_t rxBuf[2];
 
-	txBuf[0] = 0x03;
+	txBuf[0] = 0x03;	// write to volatile wiper, mid-value: 0x40
 	txBuf[1] = 0x40;
 	writeAndReadSPI(txBuf, rxBuf);
+
 	while (1) {
-		txBuf[0] = 0x0f;
+		txBuf[0] = 0x0f;	// read volatile wiper, note all bits are 1 other than the address.
 		txBuf[1] = 0xff;
 		writeAndReadSPI(txBuf, rxBuf);
-//		Bit1_ClrVal(ncs);
-//		SM1_SendBlock(spi, txBuf, 2);
-//		for (int i = 0; i < 1000; i++) {
-//		}
-//		SM1_ReceiveBlock(spi, rxBuf, 2);
-//		Bit1_SetVal(ncs);
 	}
 
 	/*** Don't write any code pass this line, or it will be deleted during code generation. ***/

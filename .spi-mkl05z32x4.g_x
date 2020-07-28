@@ -25,12 +25,12 @@
       <File Name="Static_Code/PDD/I2C_PDD.h" FileDate="2020-07-28, 11:29:26" FileAge="1595906966000" FileType="1048576" />
       <File Name="Static_Code/PDD/RTC_PDD.h" FileDate="2020-07-28, 11:29:26" FileAge="1595906966000" FileType="1048576" />
       <File Name="Generated_Code/Bit1.c" FileDate="2020-07-28, 20:58:57" FileAge="1595941137000" FileType="45637" CompNumb="5" />
-      <File Name="Generated_Code/SM1.h" FileDate="2020-07-28, 20:58:57" FileAge="1595941137000" FileType="45637" CompNumb="3" />
+      <File Name="Generated_Code/SM1.h" FileDate="2020-07-28, 22:27:01" FileAge="1595946421000" FileType="45637" CompNumb="3" />
       <File Name="Documentation/doxygen/SM1_component.txt" FileDate="2020-07-28, 20:58:57" FileAge="1595941137000" FileType="45637" CompNumb="3" />
-      <File Name="Generated_Code/SM1.c" FileDate="2020-07-28, 20:58:57" FileAge="1595941137000" FileType="45637" CompNumb="3" />
+      <File Name="Generated_Code/SM1.c" FileDate="2020-07-28, 22:27:01" FileAge="1595946421000" FileType="45637" CompNumb="3" />
       <File Name="Static_Code/PDD/LPTMR_PDD.h" FileDate="2020-07-28, 11:29:26" FileAge="1595906966000" FileType="1048576" />
       <File Name="Static_Code/PDD/CMP_PDD.h" FileDate="2020-07-28, 11:29:26" FileAge="1595906966000" FileType="1048576" />
-      <File Name="Documentation/spi-mkl05z32x4_Settings.xml" FileDate="2020-07-28, 20:58:57" FileAge="1595941137000" FileType="3072" />
+      <File Name="Documentation/spi-mkl05z32x4_Settings.xml" FileDate="2020-07-28, 22:27:01" FileAge="1595946421000" FileType="3072" />
       <File Name="Generated_Code/PE_LDD.h" FileDate="2020-07-28, 20:58:57" FileAge="1595941137000" FileType="45637" CompNumb="2" />
       <File Name="Static_Code/PDD/SPI_PDD.h" FileDate="2020-07-28, 11:29:26" FileAge="1595906966000" FileType="1048576" />
       <File Name="Documentation/doxygen/spi-mkl05z32x4_project.txt" FileDate="2020-07-28, 20:58:57" FileAge="1595941137000" FileType="45637" CompNumb="2" />
@@ -40,7 +40,7 @@
       <File Name="Static_Code/PDD/SysTick_PDD.h" FileDate="2020-07-28, 11:29:26" FileAge="1595906966000" FileType="1048576" />
       <File Name="Static_Code/PDD/COP_PDD.h" FileDate="2020-07-28, 11:29:26" FileAge="1595906966000" FileType="1048576" />
       <File Name="Sources/Events.h" FileDate="2020-07-28, 20:58:57" FileAge="1595941137000" FileType="131328" />
-      <File Name="Sources/main.c" FileDate="2020-07-28, 20:58:57" FileAge="1595941137000" FileType="128" />
+      <File Name="Sources/main.c" FileDate="2020-07-28, 22:27:01" FileAge="1595946421000" FileType="128" />
       <File Name="Sources/Events.c" FileDate="2020-07-28, 17:38:59" FileAge="1595929139000" FileType="131328" />
       <File Name="Static_Code/PDD/PIT_PDD.h" FileDate="2020-07-28, 11:29:26" FileAge="1595906966000" FileType="1048576" />
       <File Name="ProjectInfo.xml" FileDate="2020-07-28, 20:58:58" FileAge="1595941138000" FileType="45637" />
@@ -53,7 +53,7 @@
       <File Name="Static_Code/PDD/UART0_PDD.h" FileDate="2020-07-28, 11:29:26" FileAge="1595906966000" FileType="1048576" />
       <File Name="Static_Code/PDD/DMA_PDD.h" FileDate="2020-07-28, 11:29:26" FileAge="1595906966000" FileType="1048576" />
       <File Name="Static_Code/IO_Map/MKL05Z4.h" FileDate="2020-07-28, 11:29:26" FileAge="1595906966000" FileType="1048576" CompNumb="2" />
-      <File Name="Documentation/spi-mkl05z32x4.txt" FileDate="2020-07-28, 20:58:58" FileAge="1595941138000" FileType="3072" />
+      <File Name="Documentation/spi-mkl05z32x4.txt" FileDate="2020-07-28, 22:27:01" FileAge="1595946421000" FileType="3072" />
       <File Name="Static_Code/PDD/ADC_PDD.h" FileDate="2020-07-28, 11:29:26" FileAge="1595906966000" FileType="1048576" />
       <File Name="Static_Code/PDD/PDD_Types.h" FileDate="2020-07-28, 11:29:26" FileAge="1595906966000" FileType="1048576" CompNumb="2" />
       <File Name="Generated_Code/Vectors.c" FileDate="2020-07-28, 20:58:57" FileAge="1595941137000" FileType="45637" CompNumb="2" />
@@ -70,10 +70,10 @@
       <File Name="Generated_Code/Cpu.h" FileDate="2020-07-28, 16:21:36" FileAge="1595924496000" FileType="45637" CompNumb="2" />
       <File Name="Documentation/doxygen/pex.css" FileDate="2020-07-28, 11:29:26" FileAge="1595906966000" FileType="16384" CompNumb="2" />
       <File Name="Generated_Code/Cpu.c" FileDate="2020-07-28, 20:58:57" FileAge="1595941137000" FileType="45637" CompNumb="2" />
-      <File Name="Documentation/spi-mkl05z32x4_SIGNALS.txt" FileDate="2020-07-28, 20:58:57" FileAge="1595941137000" FileType="3072" />
+      <File Name="Documentation/spi-mkl05z32x4_SIGNALS.txt" FileDate="2020-07-28, 22:27:01" FileAge="1595946421000" FileType="3072" />
       <File Name="Documentation/doxygen/Bit1_component.txt" FileDate="2020-07-28, 20:58:57" FileAge="1595941137000" FileType="45637" CompNumb="5" />
       <File Name="Project_Settings/Startup_Code/startup.c" FileDate="2020-07-28, 11:29:25" FileAge="1595906965000" FileType="16384" CompNumb="2" />
     </GeneratedByPE>
   </GeneratedFilesList>
-  <CodeGenReference>33</CodeGenReference>
+  <CodeGenReference>34</CodeGenReference>
 </CodeGenerationInfo>

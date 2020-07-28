@@ -25,6 +25,9 @@ Module "SM1"       (component SPIMaster_LDD)
    - SM1_GetBlockSentStatus -This method returns whether the transmitter is finished transmitting all data block. The status 
                 flag is accumulated, after calling this method the status is returned and cleared (set to "false" state). This 
                 method is available only if method SendBlock is enabled.
+   - SM1_GetBlockReceivedStatus -This method returns whether the receiver is finished reception of all data block. The status 
+                flag is accumulated, after calling this method the status is returned and cleared (set to "false" state). This 
+                method is available only if method ReceiveBlock is enabled.
 
 Module "Bit1"      (component BitIO_LDD)
    - Bit1_Init -Initializes the device. Allocates memory for the device data structure, allocates interrupt vectors and sets 

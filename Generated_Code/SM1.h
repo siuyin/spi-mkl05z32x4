@@ -7,7 +7,7 @@
 **     Version     : Component 01.111, Driver 01.02, CPU db: 3.00.000
 **     Repository  : Kinetis
 **     Compiler    : GNU C Compiler
-**     Date/Time   : 2020-07-28, 20:58, # CodeGen: 32
+**     Date/Time   : 2020-07-28, 22:26, # CodeGen: 33
 **     Abstract    :
 **         This component "SPIMaster_LDD" implements MASTER part of synchronous
 **         serial master-slave communication.
@@ -65,10 +65,11 @@
 **            Clock configuration 6                        : This component disabled
 **            Clock configuration 7                        : This component disabled
 **     Contents    :
-**         Init               - LDD_TDeviceData* SM1_Init(LDD_TUserData *UserDataPtr);
-**         SendBlock          - LDD_TError SM1_SendBlock(LDD_TDeviceData *DeviceDataPtr, LDD_TData...
-**         ReceiveBlock       - LDD_TError SM1_ReceiveBlock(LDD_TDeviceData *DeviceDataPtr, LDD_TData...
-**         GetBlockSentStatus - bool SM1_GetBlockSentStatus(LDD_TDeviceData *DeviceDataPtr);
+**         Init                   - LDD_TDeviceData* SM1_Init(LDD_TUserData *UserDataPtr);
+**         SendBlock              - LDD_TError SM1_SendBlock(LDD_TDeviceData *DeviceDataPtr, LDD_TData...
+**         ReceiveBlock           - LDD_TError SM1_ReceiveBlock(LDD_TDeviceData *DeviceDataPtr, LDD_TData...
+**         GetBlockSentStatus     - bool SM1_GetBlockSentStatus(LDD_TDeviceData *DeviceDataPtr);
+**         GetBlockReceivedStatus - bool SM1_GetBlockReceivedStatus(LDD_TDeviceData *DeviceDataPtr);
 **
 **     Copyright : 1997 - 2015 Freescale Semiconductor, Inc. 
 **     All Rights Reserved.
@@ -141,6 +142,7 @@ extern "C" {
 #define SM1_SendBlock_METHOD_ENABLED   /*!< SendBlock method of the component SM1 is enabled (generated) */
 #define SM1_ReceiveBlock_METHOD_ENABLED /*!< ReceiveBlock method of the component SM1 is enabled (generated) */
 #define SM1_GetBlockSentStatus_METHOD_ENABLED /*!< GetBlockSentStatus method of the component SM1 is enabled (generated) */
+#define SM1_GetBlockReceivedStatus_METHOD_ENABLED /*!< GetBlockReceivedStatus method of the component SM1 is enabled (generated) */
 
 /* Events configuration constants - generated for all enabled component's events */
 #define SM1_OnBlockSent_EVENT_ENABLED  /*!< OnBlockSent event of the component SM1 is enabled (generated) */
@@ -270,6 +272,28 @@ LDD_TError SM1_SendBlock(LDD_TDeviceData *DeviceDataPtr, LDD_TData *BufferPtr, u
 */
 /* ===================================================================*/
 bool SM1_GetBlockSentStatus(LDD_TDeviceData *DeviceDataPtr);
+
+/*
+** ===================================================================
+**     Method      :  SM1_GetBlockReceivedStatus (component SPIMaster_LDD)
+*/
+/*!
+**     @brief
+**         This method returns whether the receiver is finished
+**         reception of all data block. The status flag is accumulated,
+**         after calling this method the status is returned and cleared
+**         (set to "false" state). This method is available only if
+**         method ReceiveBlock is enabled.
+**     @param
+**         DeviceDataPtr   - Device data structure
+**                           pointer returned by [Init] method.
+**     @return
+**                         - Return value:
+**                           true - Data block is completely received
+**                           false - Data block isn't completely received
+*/
+/* ===================================================================*/
+bool SM1_GetBlockReceivedStatus(LDD_TDeviceData *DeviceDataPtr);
 
 /*
 ** ===================================================================
