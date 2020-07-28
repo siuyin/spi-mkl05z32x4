@@ -1,6 +1,6 @@
 # SPI on MKL05Z32x4
 
-This coded exercises the MCP4141 SPI controlled potentiometer.
+This code exercises an MCP4141 SPI controlled potentiometer.
 
 ## Multiplexed Serial Data In and Serial Data Out on MCP4141
 1. MOSI (Master Out, Slave In) is connected to SDI/SDO via a 680R resistor.
