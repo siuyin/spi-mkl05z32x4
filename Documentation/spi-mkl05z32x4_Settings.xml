@@ -129,11 +129,8 @@ PE_DEBUGHALT();
         <group name="Clock pin">
           <Pin v="ADC0_SE6/TSI0_IN4/PTB0/IRQ_8/LLWU_P4/EXTRG_IN/SPI0_SCK" />
         </group>
-        <list name="Chip select list" v="1">
-          <group name="Chip select 0">
-            <Pin v="PTA5/LLWU_P1/RTC_CLK_IN/TPM0_CH5/SPI0_SS_b" />
-            <Active_level v="Low" />
-          </group>
+        <list name="Chip select list" v="0">
+          <EmptySection_DummyValue />
         </list>
         <list name="Attribute set list" v="1">
           <group name="Attribute set 0">
@@ -146,7 +143,7 @@ PE_DEBUGHALT();
             <Clock_rate_index v="0" />
           </group>
         </list>
-        <Clock_rate v="0.250144 &amp;#181;s" />
+        <Clock_rate v="4.002305 &amp;#181;s" />
         <HW_input_buffer_size v="1" />
         <HW_input_watermark v="1" />
         <boolgroup name="Receiver DMA" v="Disabled" />
@@ -199,6 +196,38 @@ PE_DEBUGHALT();
         <Event_procedure_name v="SM1_OnBlockReceived" />
       </event>
       <event name="OnError" v="don&amp;apos;t generate code" />
+    </Events>
+  </Bean>
+  <Bean name="Bit1" type="BitIO_LDD">
+    <Enabled v="Y" />
+    <Properties>
+      <Component_name v="Bit1" />
+      <Pin_for_I_O v="PTA5/LLWU_P1/RTC_CLK_IN/TPM0_CH5/SPI0_SS_b" />
+      <Direction v="Output" />
+      <group name="Initialization">
+        <Init__direction v="Output" />
+        <Init__value v="1" />
+        <Auto_initialization v="no" />
+      </group>
+      <Safe_mode v="no" />
+    </Properties>
+    <Methods>
+      <Init v="generate code" />
+      <Deinit v="don&amp;apos;t generate code" />
+      <GetDir v="don&amp;apos;t generate code" />
+      <SetDir v="don&amp;apos;t generate code" />
+      <SetInput v="don&amp;apos;t generate code" />
+      <SetOutput v="don&amp;apos;t generate code" />
+      <GetVal v="generate code" />
+      <PutVal v="generate code" />
+      <ClrVal v="generate code" />
+      <SetVal v="generate code" />
+      <NegVal v="don&amp;apos;t generate code" />
+      <ConnectPin v="don&amp;apos;t generate code" />
+      <GetRawVal v="don&amp;apos;t generate code" />
+    </Methods>
+    <Events>
+      <EmptySection_DummyValue />
     </Events>
   </Bean>
 </PE_PROJECT_SETTINGS_DOCUMENTATION>

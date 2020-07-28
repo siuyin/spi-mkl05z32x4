@@ -7,7 +7,7 @@
 **     Version     : Component 01.111, Driver 01.02, CPU db: 3.00.000
 **     Repository  : Kinetis
 **     Compiler    : GNU C Compiler
-**     Date/Time   : 2020-07-28, 19:05, # CodeGen: 29
+**     Date/Time   : 2020-07-28, 20:58, # CodeGen: 32
 **     Abstract    :
 **         This component "SPIMaster_LDD" implements MASTER part of synchronous
 **         serial master-slave communication.
@@ -29,11 +29,7 @@
 **            Clock pin                                    : 
 **              Pin                                        : ADC0_SE6/TSI0_IN4/PTB0/IRQ_8/LLWU_P4/EXTRG_IN/SPI0_SCK
 **              Pin signal                                 : 
-**            Chip select list                             : 1
-**              Chip select 0                              : 
-**                Pin                                      : PTA5/LLWU_P1/RTC_CLK_IN/TPM0_CH5/SPI0_SS_b
-**                Pin signal                               : 
-**                Active level                             : Low
+**            Chip select list                             : 0
 **            Attribute set list                           : 1
 **              Attribute set 0                            : 
 **                Width                                    : 8 bits
@@ -43,7 +39,7 @@
 **                Parity                                   : None
 **                Chip select toggling                     : no
 **                Clock rate index                         : 0
-**            Clock rate                                   : 0.250144 µs
+**            Clock rate                                   : 4.002305 µs
 **            HW input buffer size                         : 1
 **            HW input watermark                           : 1
 **            Receiver DMA                                 : Disabled
@@ -131,7 +127,7 @@ extern "C" {
 #define AVAILABLE_EVENTS_MASK (LDD_SPIMASTER_ON_BLOCK_RECEIVED | LDD_SPIMASTER_ON_BLOCK_SENT)
 
 /* These constants contain pins masks */
-#define SM1_AVAILABLE_PIN_MASK (LDD_SPIMASTER_INPUT_PIN | LDD_SPIMASTER_OUTPUT_PIN | LDD_SPIMASTER_CLK_PIN | LDD_SPIMASTER_CS_0_PIN)
+#define SM1_AVAILABLE_PIN_MASK (LDD_SPIMASTER_INPUT_PIN | LDD_SPIMASTER_OUTPUT_PIN | LDD_SPIMASTER_CLK_PIN)
 #define BLOCK_SENT      0x01U          /* Data block sent flag */
 #define BLOCK_RECEIVED  0x02U          /* Data block received flag */
 
@@ -231,13 +227,6 @@ LDD_TDeviceData* SM1_Init(LDD_TUserData *UserDataPtr)
                )) | (uint32_t)(
                 PORT_PCR_MUX(0x03)
                ));
-  /* PORTA_PCR5: ISF=0,MUX=3 */
-  PORTA_PCR5 = (uint32_t)((PORTA_PCR5 & (uint32_t)~(uint32_t)(
-                PORT_PCR_ISF_MASK |
-                PORT_PCR_MUX(0x04)
-               )) | (uint32_t)(
-                PORT_PCR_MUX(0x03)
-               ));
   /* SPI0_C1: SPIE=0,SPE=0,SPTIE=0,MSTR=1,CPOL=1,CPHA=1,SSOE=1,LSBFE=0 */
   SPI0_C1 = SPI_C1_MSTR_MASK |
             SPI_C1_CPOL_MASK |
@@ -245,8 +234,8 @@ LDD_TDeviceData* SM1_Init(LDD_TUserData *UserDataPtr)
             SPI_C1_SSOE_MASK;          /* Set configuration register */
   /* SPI0_C2: SPMIE=0,??=0,TXDMAE=0,MODFEN=1,BIDIROE=0,RXDMAE=0,SPISWAI=0,SPC0=0 */
   SPI0_C2 = SPI_C2_MODFEN_MASK;        /* Set configuration register */
-  /* SPI0_BR: ??=0,SPPR=2,SPR=0 */
-  SPI0_BR = (SPI_BR_SPPR(0x02) | SPI_BR_SPR(0x00)); /* Set baud rate register */
+  /* SPI0_BR: ??=0,SPPR=2,SPR=4 */
+  SPI0_BR = (SPI_BR_SPPR(0x02) | SPI_BR_SPR(0x04)); /* Set baud rate register */
   /* SPI0_C1: SPE=1 */
   SPI0_C1 |= SPI_C1_SPE_MASK;          /* Enable SPI module */
   /* Registration of the device structure */

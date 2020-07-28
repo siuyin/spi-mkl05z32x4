@@ -23,6 +23,7 @@
 
 \page page_components Components 
 - \subpage SM1
+- \subpage Bit1
 
 */
 

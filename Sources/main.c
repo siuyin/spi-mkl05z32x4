@@ -30,6 +30,7 @@
 #include "Cpu.h"
 #include "Events.h"
 #include "SM1.h"
+#include "Bit1.h"
 /* Including shared modules, which are used for whole project */
 #include "PE_Types.h"
 #include "PE_Error.h"
@@ -38,6 +39,18 @@
 /* User includes (#include below this line is not maintained by Processor Expert) */
 
 #include <stdbool.h>
+
+LDD_TDeviceData* ncs;
+LDD_TDeviceData* spi;
+
+void writeAndReadSPI(uint8_t* txBuf, uint8_t* rxBuf) {
+	Bit1_ClrVal(ncs);
+	SM1_SendBlock(spi, txBuf, 2);
+	for (int i = 0; i < 500; i++) {
+	}
+	SM1_ReceiveBlock(spi, rxBuf, 2);
+	Bit1_SetVal(ncs);
+}
 /*lint -save  -e970 Disable MISRA rule (6.3) checking. */
 int main(void)
 /*lint -restore Enable MISRA rule (6.3) checking. */
@@ -49,25 +62,36 @@ int main(void)
 	/*** End of Processor Expert internal initialization.                    ***/
 
 	/* Write your code here */
+	ncs = Bit1_Init(NULL);
+	spi = SM1_Init(NULL);
+	uint8_t txBuf[2];
+	uint8_t rxBuf[2];
 
-	LDD_TDeviceData* spi = SM1_Init(NULL);
-	uint8_t buf[2] = { 0x0, 0x10 };
-
+	txBuf[0] = 0x03;
+	txBuf[1] = 0x40;
+	writeAndReadSPI(txBuf, rxBuf);
 	while (1) {
-		SM1_SendBlock(spi, buf, 2);
-		for (int i = 0; i < 1000; i++) {
-		}
+		txBuf[0] = 0x0f;
+		txBuf[1] = 0xff;
+		writeAndReadSPI(txBuf, rxBuf);
+//		Bit1_ClrVal(ncs);
+//		SM1_SendBlock(spi, txBuf, 2);
+//		for (int i = 0; i < 1000; i++) {
+//		}
+//		SM1_ReceiveBlock(spi, rxBuf, 2);
+//		Bit1_SetVal(ncs);
 	}
 
 	/*** Don't write any code pass this line, or it will be deleted during code generation. ***/
-  /*** RTOS startup code. Macro PEX_RTOS_START is defined by the RTOS component. DON'T MODIFY THIS CODE!!! ***/
-  #ifdef PEX_RTOS_START
-    PEX_RTOS_START();                  /* Startup of the selected RTOS. Macro is defined by the RTOS component. */
-  #endif
-  /*** End of RTOS startup code.  ***/
-  /*** Processor Expert end of main routine. DON'T MODIFY THIS CODE!!! ***/
-  for(;;){}
-  /*** Processor Expert end of main routine. DON'T WRITE CODE BELOW!!! ***/
+	/*** RTOS startup code. Macro PEX_RTOS_START is defined by the RTOS component. DON'T MODIFY THIS CODE!!! ***/
+#ifdef PEX_RTOS_START
+	PEX_RTOS_START(); /* Startup of the selected RTOS. Macro is defined by the RTOS component. */
+#endif
+	/*** End of RTOS startup code.  ***/
+	/*** Processor Expert end of main routine. DON'T MODIFY THIS CODE!!! ***/
+	for (;;) {
+	}
+	/*** Processor Expert end of main routine. DON'T WRITE CODE BELOW!!! ***/
 } /*** End of main routine. DO NOT MODIFY THIS TEXT!!! ***/
 
 /* END main */

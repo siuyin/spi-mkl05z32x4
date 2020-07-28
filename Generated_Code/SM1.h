@@ -7,7 +7,7 @@
 **     Version     : Component 01.111, Driver 01.02, CPU db: 3.00.000
 **     Repository  : Kinetis
 **     Compiler    : GNU C Compiler
-**     Date/Time   : 2020-07-28, 19:05, # CodeGen: 29
+**     Date/Time   : 2020-07-28, 20:58, # CodeGen: 32
 **     Abstract    :
 **         This component "SPIMaster_LDD" implements MASTER part of synchronous
 **         serial master-slave communication.
@@ -29,11 +29,7 @@
 **            Clock pin                                    : 
 **              Pin                                        : ADC0_SE6/TSI0_IN4/PTB0/IRQ_8/LLWU_P4/EXTRG_IN/SPI0_SCK
 **              Pin signal                                 : 
-**            Chip select list                             : 1
-**              Chip select 0                              : 
-**                Pin                                      : PTA5/LLWU_P1/RTC_CLK_IN/TPM0_CH5/SPI0_SS_b
-**                Pin signal                               : 
-**                Active level                             : Low
+**            Chip select list                             : 0
 **            Attribute set list                           : 1
 **              Attribute set 0                            : 
 **                Width                                    : 8 bits
@@ -43,7 +39,7 @@
 **                Parity                                   : None
 **                Chip select toggling                     : no
 **                Clock rate index                         : 0
-**            Clock rate                                   : 0.250144 µs
+**            Clock rate                                   : 4.002305 µs
 **            HW input buffer size                         : 1
 **            HW input watermark                           : 1
 **            Receiver DMA                                 : Disabled
@@ -150,7 +146,7 @@ extern "C" {
 #define SM1_OnBlockSent_EVENT_ENABLED  /*!< OnBlockSent event of the component SM1 is enabled (generated) */
 #define SM1_OnBlockReceived_EVENT_ENABLED /*!< OnBlockReceived event of the component SM1 is enabled (generated) */
 
-#define SM1_CHIP_SELECT_COUNT 1U       /*!< Number of chip selects */
+#define SM1_CHIP_SELECT_COUNT 0U       /*!< Number of chip selects */
 #define SM1_CONFIGURATION_COUNT 1U     /*!< Number of predefined configurations */
 
 /*
